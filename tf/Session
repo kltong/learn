@@ -1,0 +1,21 @@
+1、 两种会话管理模式：
+	a.显式管理 
+		sess = tf.Session()
+		sess.run(...)
+		...
+		sess.close()
+		(可能会存在资源泄露问题)
+	b.基于Python上下文管理器模式
+		with tf.Session() as sess:
+			sess.run(...)
+
+2、会话均需手动指定
+
+3、tf.InteractiveSession()会返回一个会话，并将该会话注册为默认会话,使用完需显式关闭
+
+4、注册会话之前可以通过tf.ConfigProto()对即将生成的会话进行设置
+
+
+
+
+

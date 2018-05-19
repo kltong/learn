@@ -1,0 +1,13 @@
+1、tf.Variable(shape)用以定义tensorflow变量
+	例：tf.Variable(tf.random_normal([2,3],stddev=2)) 定义一个2行3列的张量，元素均值为0，标准差为22
+
+2、变量使用前均需初始化：
+	变量初始化方式包含如下两种
+		a. sess.run(w1.initializer)
+		   sess.run(w2.initializer)
+		b. initop = tf.initialize_all_variables()
+		   sess.run(init_op)
+
+3、tf.placeholder(type,shape,name) 定义一个作用类似占位符的变量，它声明了数据格式，形状，名称等内容，待需要使用的时候按要求供给数据
+
+4、feed_dict={} 是一个字典，用以向palceholder提供数据，所用通过placeholer声明占用的变量，在需要时均可通过feed_dict={}供给实际数据
