@@ -1,0 +1,63 @@
+1、常见激活函数：tf.nn.relu、tf.sigmoid、tf.tanh、softplus、tf.nn.dropout,同时tensorflow也支持自定义激活函数
+
+2、softmax层：
+	作用：将输出的向量值归一化并转化为对应的概率分布，将标签也看作一个概率分	      分布，这样就可以计算两个分布的交叉熵，并将之作为损失函数
+
+3、tf.clip_by_value:可以将一个张量中的数值限定在某个范围内
+
+4、tf.log:对张量中每一个元素依次求对数
+
+5、“*”乘法，相当与矩阵运算中的点乘，将两个张量中对应位置的元素分别相乘
+
+6、tf.nn.softmax_cross_entropy_with_logits(y,y_):
+	将输入的两个矩阵通过softmax回归之后求交叉熵
+
+7、分类问题常用交叉熵作为所是函数，回归为题常用均方误差作为损失函数
+
+8、tf.square:计算张量中每个元素的平方
+
+9、tf.greater(a,b)
+	判断a张量中的每一个元素是否大于b张量中对应元素，并返回一个以true、false
+	为元素值的张量
+
+10、tf.select(a,b,c)
+	作用类似三目运算符
+
+11、例：tf.reduce_sum(tf.select(tf.greater(v1,v2),a(v1-v2),b(v2-v1)))
+	v1,v2均为张量
+
+12、tensorflow优化函数：优化函数基本都是提督下降算法的变种
+	(1)tf.train.Optimizer
+	(2)tf.train.GradientDescentOptimizer
+	(3)tf.train.AdadeltaOptimizer
+		在（4）的基础上，将分母项的影响减弱，以解决（4）在后期参数更新太		慢的问题，此外，这种优化算法还支持不设置学习率，γ一般取0.9左右
+	(4)tf.train.AdagradOptimizer
+		这个算法就可以对低频的参数做较大的更新，对高频的做较小的更新，也		因此，对于稀疏的数据它的表现很好，很好地提高了 SGD 的鲁棒性，直
+		观的理解是在学习率中加一个分母项，每个参数的分母项会随着更新次数
+		的增加而增大，实现了自动的学习率更新
+		学习率一般设置为0.01
+	(5)tf.train.AdagradDAOptimizer
+	(6)tf.train.MomentumOptimizer
+		SGD 在 ravines 的情况下容易被困住， ravines 就是曲面的一个方向比		另一个方向更陡，这时 SGD 会发生震荡而迟迟不能接近极小值,直观的理		解是因为在极小值附近容易更新到另一个梯度方向，造成震荡
+		Momentum 通过加入 γv_t−1（γ一般取0.9左右） ，可以加速 SGD， 并且
+		抑制震荡，直观地理解就是让优化时的步长岁损失函数的减小而减小（不
+		是通过改变学习率实现的）	
+	(7)tf.train.AdamOptimizer
+		这个算法是另一种计算每个参数的自适应学习率的方法。除了像 Adadelt		a 和 RMSprop 一样存储了过去梯度的平方 vt 的指数衰减平均值 ，也像 		momentum 一样保持了过去梯度 mt 的指数衰减平均值，建议 β1 ＝ 0.9
+		，β2 ＝ 0.999，ϵ ＝ 10e−8，实践表明，Adam 比其他适应性学习方法效
+		果要好。
+	(8)tf.train.FtrlOptimizer
+	(9)tf.train.ProximalGradientDescentOptimizer
+	(10)tf.train.ProximalAdagradOptimizer
+	(11)tf.train.RMSPropOptimizer
+		同样为解决（4）的学习率急剧下降而设计的自适应学习率优化方式，学
+		习率一般设置0.001，γ一般取0.9左右
+	
+13、learning_rate = tf.train.exponential_deacy(0.1,0,100,0.9,staircase-true)
+	
+
+14、正则化可以一定程度上解决过拟合问题
+	tf.contrib.layers.l1_regularizer(lambda)(w)
+	tf.contrib.layers.l2_regularizer(lambda)(w)
+	上述两式将参数w分别L1、L2正则化，lambda表示正则化项的权重
+
