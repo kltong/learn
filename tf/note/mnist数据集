@@ -1,0 +1,4 @@
+1、tensorflow中提供一个处理mnist数据集的类
+	from tensorflow .examples.tutorials.mnist import input_data
+	mnist = input_data.read_data_sets("path",one_hot=True)
+
